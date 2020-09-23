@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Gibt Es Weiße Soße?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@700&display=swap" rel="stylesheet"> 
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            background-color: #FFF5EB;
+            overflow-x: hidden;
+        }
+        #result {
+            font-family: 'Vollkorn', serif;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 15rem;
+            border-top: dotted 4px #424B54;
+            border-bottom: dotted 4px #424B54;
+            color: #424B54;
+            text-align: center;
+            width: 700px;
+        }
+        #emoji {
+            color: #424B54;
+            font-size: 50%;
+        }
+        #counter {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            padding: 15px;
+        }
+        @media screen and (max-width: 720px) {
+            #result {
+                font-family: 'Vollkorn', serif;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 7rem;
+                color: #424B54;
+                padding-left: 0;
+                padding-right: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="result">
+        {% if sauce %}
+            Ja
+        {% else %}
+            Nein <span id="emoji">&#127881;</span>
+        {% endif %}
+    </div>
+    <span id="counter">Seit dem 23. September 2020 gab es {{ total }} mal weiße Soße in der Mensa.
+        &bullet;
+        <a href="https://www.studentenwerk.uni-heidelberg.de/speiseplan_neu">Speiseplan</a>
+        &bullet;
+        <a href="{{ url_for('impressum') }}">Impressum</a>
+    </span>
+</body>
+</html>
