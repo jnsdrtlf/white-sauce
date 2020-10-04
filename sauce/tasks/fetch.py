@@ -55,3 +55,4 @@ def fetch():
 
     redis.set("sauce_current_status", is_it_in_there)
     redis.set("sauce_last_date", today.isoformat())
+    return is_it_in_there
