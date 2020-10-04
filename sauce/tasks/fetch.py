@@ -36,6 +36,10 @@ def fetch():
             break
 
     today = date.today()
+    
+    if today.weekday() >= 5:
+        is_it_in_there = 0
+        
     old_date = redis.get("sauce_last_date")
     if old_date is None:
         old_date = (today - timedelta(days=1)).isoformat()
