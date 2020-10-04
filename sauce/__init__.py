@@ -5,7 +5,6 @@ import click
 from flask import Flask, render_template
 from flask.cli import FlaskGroup
 from redis import Redis
-from celery.schedules import crontab
 
 from sauce.util.host_middleware import host_middleware
 from sauce.tasks import celery
@@ -35,19 +34,12 @@ def create_app(name="sauce", config=None):
     redis = Redis(**app.config["REDIS_CONFIG"])
     celery.conf.update(app.config)
 
-    celery.conf.CELERYBEAT_SCHEDULE = {
-        "fetch-every-morning": {
-            "task": "tasks.fetch.fetch",
-                "schedule": crontab(hour=6, minute=0)
-        }
-    }
-
     fetch.apply_async()
 
     @app.route("/", methods=["GET"])
     def index():
         res = redis.get("sauce_current_status")
-        total = redis.get("sauce_current_status")
+        total = redis.get("sauce_total")
         if total in EMPTY:
             total = b"0"
         total = total.decode()

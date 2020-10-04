@@ -44,7 +44,8 @@ def fetch():
     if today > date.fromisoformat(old_date):
         tot = redis.get("sauce_total")
         if tot is None:
-            tot = 0
+            tot = b"0"
+        tot = int(tot)
         tot += is_it_in_there
         redis.set("sauce_total", tot)
 
