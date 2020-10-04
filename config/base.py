@@ -50,9 +50,11 @@ REDIS_CONFIG = {
 
 # Celery Settings
 CELERY_BROKER_URL = f"redis://{REDIS_CONFIG['host']}:{REDIS_CONFIG['port']}/0"
-# Celery does not use the CELERY_ prefix for this config
-result_backend = broker_url = CELERY_BROKER_URL
-
+CELERY_CONFIG = {
+    "result_backend": CELERY_BROKER_URL,
+    "broker_url": CELERY_BROKER_URL,
+    "worker_redirect_stdouts_level": "INFO"
+}
 
 try:
     from .local import *

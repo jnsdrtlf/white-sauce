@@ -32,9 +32,11 @@ def create_app(name="sauce", config=None):
     host_middleware(app)
 
     redis = Redis(**app.config["REDIS_CONFIG"])
-    celery.conf.update(app.config)
+    celery.conf.update(
+        **config_module.CELERY_CONFIG,
+    )
 
-    fetch.apply_async()
+    fetch.delay()
 
     @app.route("/", methods=["GET"])
     def index():
