@@ -22,7 +22,6 @@ COPY . /app/
 RUN useradd sauce
 RUN chmod +x /app/docker-entrypoint.sh
 RUN chmod +x /app/worker.sh
-RUN chmod +x /app/worker_beat.sh
 RUN chown -R sauce /app
 
 USER sauce
